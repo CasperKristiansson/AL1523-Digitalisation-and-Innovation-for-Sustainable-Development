@@ -4,11 +4,22 @@ import { createUseStyles } from "react-jss"
 const useStyles = createUseStyles({
 	Input: {
         paddingTop: "200px",
+        "@media (max-width: 600px)": {
+            paddingTop: "100px",
+        },
     },
     Row: {
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         gridGap: "15px",
+        // At 1000px or less, the grid will be 2 columns wide
+        "@media (max-width: 1000px)": {
+            gridTemplateColumns: "repeat(2, 1fr)",
+        },
+        // At 500px or less, the grid will be 1 column wide
+        "@media (max-width: 500px)": {
+            gridTemplateColumns: "repeat(1, 1fr)",
+        },
     },
     Col4: {
         display: "flex",
@@ -23,7 +34,10 @@ const useStyles = createUseStyles({
         border: "1px solid #A49B9B",
         borderRadius: "8px",
         fontSize: "1.4em",
-        color: "#222222"
+        color: "#222222",
+        "@media (max-width: 1000px)": {
+            width: "90%",
+        },
     },
     label: {
         textAlign: "left",
@@ -31,6 +45,9 @@ const useStyles = createUseStyles({
         height: "30px",
         color: "#777777",
         fontSize: "1.4em",
+        "@media (max-width: 1000px)": {
+            width: "90%",
+        },
     },
 });
 
