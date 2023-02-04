@@ -1,28 +1,3 @@
-// Export a function that takes in a list of classifications and returns a list of classifications with the counts
-// of each classification type.
-// It will recieve: 
-// const [state, setState] = React.useState({
-//     location: "",
-//     depth: "",
-//     surfaceType: "",
-//     s: "",
-//     ca: "",
-//     fe: "",
-//     pHinit: "",
-//     pHox: "",
-// });
-
-// It will return:
-// const [result, setResult] = React.useState({
-//     controlA0D2: "",
-//     controlD2A0: "",
-//     logicalTest: "",
-//     soilClassification: "",
-//     borderZoneA: "",
-//     borderZoneB: "",
-// });
-
-// Define Classification
 export interface ClassificationState {
     location: string;
     depth: string;
@@ -76,14 +51,7 @@ export const computeClassification = (classificationsState: ClassificationState)
         borderZoneB: borderZoneB(A0D2, D2A0),
     };
 
-    return {
-        controlA0D2: "",
-        controlD2A0: "",
-        logicalTest: "",
-        soilClassification: "",
-        borderZoneA: "",
-        borderZoneB: "",
-    };
+    return result;
 }
 
 // =IFS([@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;+Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]])
