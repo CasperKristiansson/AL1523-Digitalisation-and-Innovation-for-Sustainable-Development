@@ -4,6 +4,8 @@ import { Input } from '../Components/input';
 import { Loader } from '../Components/loader';
 import { Result } from '../Components/result';
 
+import { Classification, ClassificationState, computeClassification } from '../Utils/classification';
+
 import { createUseStyles } from "react-jss"
 
 const useStyles = createUseStyles({
@@ -34,40 +36,38 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		location: "",
 		depth: "",
 		surfaceType: "",
-		s: "",
-		ca: "",
-		fe: "",
-		pHinit: "",
-		pHox: "",
-	});
-	const [result, setResult] = React.useState({
-		controlA0D2: "",
-		controlD2A0: "",
-		logicalTest: "",
-		soilClassification: "",
-		borderZoneA: "",
-		borderZoneB: "",
-	});
+		s: 0,
+		ca: 0,
+		fe: 0,
+		pHinit: 0,
+		pHox: 0,
+	} as ClassificationState);
+
+	const [result, setResult] = React.useState({} as Classification);
 
 	const handleAnalyzeClick = () => {
 		if (
-			state.location === "" ||
-			state.depth === "" ||
-			state.surfaceType === "" ||
-			state.s === "" ||
-			state.ca === "" ||
-			state.fe === "" ||
-			state.pHinit === "" ||
-			state.pHox === ""
+			!state.location ||
+			!state.depth ||
+			!state.surfaceType ||
+			state.s === 0 ||
+			state.ca === 0 ||
+			state.fe === 0 ||
+			state.pHinit === 0 ||
+			state.pHox === 0
 		) {
 			alert("Please fill all fields");
 			return;
 		}
+
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
 			setShowResult(true);
-		}, 500);
+
+			setResult(computeClassification(state));
+
+		}, 200);
 	};
 
 	return (
