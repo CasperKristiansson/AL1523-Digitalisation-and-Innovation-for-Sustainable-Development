@@ -27,11 +27,11 @@ export interface ClassificationState {
     location: string;
     depth: string;
     surfaceType: string;
-    s: string;
-    ca: string;
-    fe: string;
-    pHinit: string;
-    pHox: string;
+    s: number;
+    ca: number;
+    fe: number;
+    pHinit: number;
+    pHox: number;
 }
 
 export interface Classification {
@@ -52,4 +52,111 @@ export const computeClassification = (classificationsState: ClassificationState)
         borderZoneA: "",
         borderZoneB: "",
     };
+}
+
+// A0) Not Sulid soil = "D2" && s < 1000 && pHinit > 7.89 && pHox > 4.55 && fe/s > 9 && ca/s > 2.1
+function checkA0(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s < 1000 &&
+        classificationsState.pHinit > 7.89 &&
+        classificationsState.pHox > 4.55 &&
+        feS > 9 &&
+        caS > 2.1
+    )
+}
+
+// A1) Sulphide soil with negligible risk of acidification = "A0" && s > 100 && pHinit > 4.89 && pHox > 4.3 && fe/s > 15 && ca/s > 1 && s < 1500
+function checkA1(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 100 &&
+        classificationsState.pHinit > 4.89 &&
+        classificationsState.pHox > 4.3 &&
+        feS > 15 &&
+        caS > 1 &&
+        classificationsState.s < 1500
+    )
+}
+
+// B0) Sulphide soil low risk of acidification = "B0" && s > 900 && s < 3000 && pHinit > 5.59 && pHox > 4.3 && fe/s > 3 && fe/s < 25 && ca/s > 1.89 && ca/s < 4
+function checkB0(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 900 &&
+        classificationsState.s < 3000 &&
+        classificationsState.pHinit > 5.59 &&
+        classificationsState.pHox > 4.3 &&
+        feS > 3 &&
+        feS < 25 &&
+        caS > 1.89 &&
+        caS < 4
+    )
+}
+
+// C1) Acid sulfate soil low risk of acidification = "C1" && s > 200 && s < 1100 && pHinit < 5.5 && pHox < 5 && fe/s > 10 && ca/s > 2
+function checkC1(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 200 &&
+        classificationsState.s < 1100 &&
+        classificationsState.pHinit < 5.5 &&
+        classificationsState.pHox < 5 &&
+        feS > 10 &&
+        caS > 2
+    )
+}
+
+// C2) Acid sulfate soil with risk of acidification = "C2" && s > 1000 && pHinit < 5.9 && pHox > 2 && fe/s > 0.1 && fe/s < 21 && ca/s < 3.4
+function checkC2(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 1000 &&
+        classificationsState.pHinit < 5.9 &&
+        classificationsState.pHox > 2 &&
+        feS > 0.1 &&
+        feS < 21 &&
+        caS < 3.4
+    )
+}
+
+// D1) Sulphide soil without buffering capacity, high risk of acidification = "D1" && s > 1500 && s < 4000 && pHinit > 5.8 && pHox > 2 && fe/s > 3.9 && fe/s < 15 && ca/s > 0.6 && ca/s < 4.1
+function checkD1(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 1500 &&
+        classificationsState.s < 4000 &&
+        classificationsState.pHinit > 5.8 &&
+        classificationsState.pHox > 2 &&
+        feS > 3.9 &&
+        feS < 15 &&
+        caS > 0.6 &&
+        caS < 4.1
+    )
+}
+
+// D2) Sulphide soil without buffering capacity, very high risk of acidification = "D2" && s > 4000 && pHinit > 5.8 && fe/s > 0.1 && fe/s < 10 && ca/s < 4
+function checkD2(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 4000 &&
+        classificationsState.pHinit > 5.8 &&
+        feS > 0.1 &&
+        feS < 10 &&
+        caS < 4
+    )
 }
