@@ -81,7 +81,7 @@ export const computeClassification = (classificationsState: ClassificationState)
         controlA0D2: A0D2,
         controlD2A0: D2A0,
         logicalTest: logicalTest(A0D2, D2A0),
-        soilClassification: "",
+        soilClassification: soilClassification(A0D2, D2A0),
         borderZoneA: "",
         borderZoneB: "",
     };
@@ -144,6 +144,17 @@ function logicalTest(controlA0D2: string, controlD2A0: string): string {
         return "OK";
     } else if (controlA0D2 < controlD2A0) {
         return "Gränszon";
+    } else {
+        return "";
+    }
+}
+
+//=IF([@[Kontroll A0-D2]]=[@[KontrollD2-A0]];[@[Kontroll A0-D2]];"Kontrollera (gränszon)")
+function soilClassification(controlA0D2: string, controlD2A0: string): string {
+    if (controlA0D2 === controlD2A0) {
+        return controlA0D2;
+    } else if (controlA0D2 < controlD2A0) {
+        return "Kontrollera (gränszon)";
     } else {
         return "";
     }
