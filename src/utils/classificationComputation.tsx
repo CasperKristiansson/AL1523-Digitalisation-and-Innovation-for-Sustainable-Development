@@ -95,29 +95,48 @@ export const computeClassification = (classificationsState: ClassificationState)
 }
 
 function controlA0D2(check: Check): string {
-    if (check.a0 === true) {
-        return "A0) ej sulfidjord";
+    switch (true) {
+        case check.a0 === true:
+            return "A0) ej sulfidjord";
+        case check.a1 === true:
+            return "A1) Sulfidjord med försumbar försurningsrisk";
+        case check.b0 === true:
+            return "B) Sulfidjord låg försurningsrisk";
+        case check.c1 === true:
+            return "C1) Sur sulfatjord låg försurningsrisk";
+        case check.c2 === true:
+            return "C2) Sur sulfatjord med försurningsrisk";
+        case check.d1 === true:
+            return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
+        case check.d2 === true:
+            return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
+        default:
+            return "";
     }
-    if (check.a1 === true) {
-        return "A1) Sulfidjord med försumbar försurningsrisk";
-    }
-    if (check.b0 === true) {
-        return "B) Sulfidjord låg försurningsrisk";
-    }
-    if (check.c1 === true) {
-        return "C1) Sur sulfatjord låg försurningsrisk";
-    }
-    if (check.c2 === true) {
-        return "C2) Sur sulfatjord med försurningsrisk";
-    }
-    if (check.d1 === true) {
-        return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
-    }
-    if (check.d2 === true) {
-        return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
-    }
-    return "";
+      
 }
+
+function controlD2A0(check: Check): string {
+    switch (true) {
+        case check.d2:
+            return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
+        case check.d1:
+            return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
+        case check.c2:
+            return "C2) Sur sulfatjord med försurningsrisk";
+        case check.c1:
+            return "C1) Sur sulfatjord låg försurningsrisk";
+        case check.b0:
+            return "B) Sulfidjord låg försurningsrisk";
+        case check.a1:
+            return "A1) Sulfidjord med försumbar försurningsrisk";
+        case check.a0:
+            return "A0) ej sulfidjord";
+        default:
+            return "";
+    }
+}
+
 
 // A0) Not Sulid soil = "D2" && s < 1000 && pHinit > 7.89 && pHox > 4.55 && fe/s > 9 && ca/s > 2.1
 function checkA0(classificationsState: ClassificationState): Boolean {
