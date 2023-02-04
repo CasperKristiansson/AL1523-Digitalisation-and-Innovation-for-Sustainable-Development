@@ -160,6 +160,17 @@ function soilClassification(controlA0D2: string, controlD2A0: string): string {
     }
 }
 
+// =IF([@[Kontroll A0-D2]]=[@[KontrollD2-A0]];"- ";[@[Kontroll A0-D2]])
+function borderZoneA(controlA0D2: string, controlD2A0: string): string {
+    if (controlA0D2 === controlD2A0) {
+        return "-";
+    } else if (controlA0D2 < controlD2A0) {
+        return controlA0D2;
+    } else {
+        return "";
+    }
+}
+
 
 // A0) Not Sulid soil = "D2" && s < 1000 && pHinit > 7.89 && pHox > 4.55 && fe/s > 9 && ca/s > 2.1
 function checkA0(classificationsState: ClassificationState): Boolean {
