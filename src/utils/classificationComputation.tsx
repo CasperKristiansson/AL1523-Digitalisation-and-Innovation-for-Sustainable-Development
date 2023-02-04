@@ -96,25 +96,25 @@ export const computeClassification = (classificationsState: ClassificationState)
 
 function controlA0D2(check: Check): string {
     if (check.a0 === true) {
-        return "A0) Not Sulid soil";
+        return "A0) ej sulfidjord";
     }
     if (check.a1 === true) {
-        return "A1) Sulphide soil with negligible risk of acidification";
+        return "A1) Sulfidjord med försumbar försurningsrisk";
     }
     if (check.b0 === true) {
-        return "B0) Sulphide soil with low risk of acidification";
+        return "B) Sulfidjord låg försurningsrisk";
     }
     if (check.c1 === true) {
-        return "C1) Acid sulphate soil with low risk of acidification";
+        return "C1) Sur sulfatjord låg försurningsrisk";
     }
     if (check.c2 === true) {
-        return "C2) Acid sulphate soil with risk of acidification";
+        return "C2) Sur sulfatjord med försurningsrisk";
     }
     if (check.d1 === true) {
-        return "D1) Sulphide soil without buffering capacity, high risk of acidification";
+        return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
     }
     if (check.d2 === true) {
-        return "D2) Sulphide soil without buffering capacity, very high risk of acidification";
+        return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
     }
     return "";
 }
