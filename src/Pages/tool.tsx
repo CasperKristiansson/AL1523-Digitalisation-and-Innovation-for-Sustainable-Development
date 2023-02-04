@@ -14,6 +14,7 @@ const useStyles = createUseStyles({
 		alignItems: "center",
 		justifyContent: "center",
 		paddingTop: "100px",
+		paddingBottom: "25px",
 	},
 	Button: {
 		backgroundColor: "#72AD29",

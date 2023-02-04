@@ -3,8 +3,8 @@ import { createUseStyles } from "react-jss"
 
 const useStyles = createUseStyles({
     Wrapper: {
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
     },
 	Header: {
 		color: "#72AD29",
