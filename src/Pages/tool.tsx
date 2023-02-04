@@ -52,7 +52,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 	const [loading, setLoading] = React.useState(false);
 	const [showResult, setShowResult] = React.useState(false);
 	const [numSamples, setNumSamples] = React.useState(1);
-	const [result, setResult] = React.useState({} as Classification);
+	const [results, setResults] = React.useState([{} as Classification]);
 	const [states, setStates] = React.useState([{
 		location: "",
 		depth: "",
@@ -96,30 +96,20 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		setStates(newStates);
 	};
 
-	// const handleAnalyzeClick = () => {
-	// 	if (
-	// 		!state.location ||
-	// 		!state.depth ||
-	// 		!state.surfaceType ||
-	// 		state.s === 0 ||
-	// 		state.ca === 0 ||
-	// 		state.fe === 0 ||
-	// 		state.pHinit === 0 ||
-	// 		state.pHox === 0
-	// 	) {
-	// 		alert("Please fill all fields");
-	// 		return;
-	// 	}
+	const handleAnalyzeClick = () => {
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+			setShowResult(true);
 
-	// 	setLoading(true);
-	// 	setTimeout(() => {
-	// 		setLoading(false);
-	// 		setShowResult(true);
+			const newResults = [];
+			for (let i = 0; i < numSamples; i++) {
+				newResults[i] = computeClassification(states[i]);
+			}
+			setResults(newResults);
 
-	// 		setResult(computeClassification(state));
-
-	// 	}, 350);
-	// };
+		}, 350);
+	};
 
 	return (
 		<>	
@@ -127,7 +117,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 			<Header />
 			<Input setState={setState} numSamples={numSamples} states={states} />
 			<div className={classes.ButtonWrapper}>
-				<button className={classes.Button} >
+				<button className={classes.Button} onClick={handleAnalyzeClick} >
 					Analyze
 				</button>
 				<div className={classes.SelectWrapper}>
@@ -140,9 +130,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 				</div>
 			</div>
 			{showResult && (
-				<Result
-					result={result}
-				/>
+				<Result result={results} />
 			)}
 		</>
 	);
