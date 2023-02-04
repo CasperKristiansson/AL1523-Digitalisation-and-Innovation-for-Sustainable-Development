@@ -43,7 +43,47 @@ export interface Classification {
     borderZoneB: string;
 }
 
+// Create a interface for const check = {
+    //     a0: checkA0(classificationsState),
+    //     a1: checkA1(classificationsState),
+    //     b0: checkB0(classificationsState),
+    //     c1: checkC1(classificationsState),
+    //     c2: checkC2(classificationsState),
+    //     d1: checkD1(classificationsState),
+    //     d2: checkD2(classificationsState),
+    // };
+
+interface Check {
+    a0: Boolean;
+    a1: Boolean;
+    b0: Boolean;
+    c1: Boolean;
+    c2: Boolean;
+    d1: Boolean;
+    d2: Boolean;
+}
+
 export const computeClassification = (classificationsState: ClassificationState): Classification => {
+    const check: Check = {
+        a0: checkA0(classificationsState),
+        a1: checkA1(classificationsState),
+        b0: checkB0(classificationsState),
+        c1: checkC1(classificationsState),
+        c2: checkC2(classificationsState),
+        d1: checkD1(classificationsState),
+        d2: checkD2(classificationsState),
+    };
+
+    // Use interface Classification
+    const result: Classification = {
+        controlA0D2: controlA0D2(check),
+        controlD2A0: "",
+        logicalTest: "",
+        soilClassification: "",
+        borderZoneA: "",
+        borderZoneB: "",
+    };
+
     return {
         controlA0D2: "",
         controlD2A0: "",
@@ -52,6 +92,31 @@ export const computeClassification = (classificationsState: ClassificationState)
         borderZoneA: "",
         borderZoneB: "",
     };
+}
+
+function controlA0D2(check: Check): string {
+    if (check.a0 === true) {
+        return "A0) Not Sulid soil";
+    }
+    if (check.a1 === true) {
+        return "A1) Sulphide soil with negligible risk of acidification";
+    }
+    if (check.b0 === true) {
+        return "B0) Sulphide soil with low risk of acidification";
+    }
+    if (check.c1 === true) {
+        return "C1) Acid sulphate soil with low risk of acidification";
+    }
+    if (check.c2 === true) {
+        return "C2) Acid sulphate soil with risk of acidification";
+    }
+    if (check.d1 === true) {
+        return "D1) Sulphide soil without buffering capacity, high risk of acidification";
+    }
+    if (check.d2 === true) {
+        return "D2) Sulphide soil without buffering capacity, very high risk of acidification";
+    }
+    return "";
 }
 
 // A0) Not Sulid soil = "D2" && s < 1000 && pHinit > 7.89 && pHox > 4.55 && fe/s > 9 && ca/s > 2.1
