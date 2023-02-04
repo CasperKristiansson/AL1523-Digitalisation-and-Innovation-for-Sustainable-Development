@@ -74,11 +74,13 @@ export const computeClassification = (classificationsState: ClassificationState)
         d2: checkD2(classificationsState),
     };
 
-    // Use interface Classification
+    const A0D2 = controlA0D2(check);
+    const D2A0 = controlD2A0(check);
+
     const result: Classification = {
-        controlA0D2: controlA0D2(check),
-        controlD2A0: "",
-        logicalTest: "",
+        controlA0D2: A0D2,
+        controlD2A0: D2A0,
+        logicalTest: logicalTest(A0D2, D2A0),
         soilClassification: "",
         borderZoneA: "",
         borderZoneB: "",
@@ -134,6 +136,16 @@ function controlD2A0(check: Check): string {
             return "A0) ej sulfidjord";
         default:
             return "";
+    }
+}
+
+function logicalTest(controlA0D2: string, controlD2A0: string): string {
+    if (controlA0D2 === controlD2A0) {
+        return "OK";
+    } else if (controlA0D2 < controlD2A0) {
+        return "Gränszon";
+    } else {
+        return "";
     }
 }
 
