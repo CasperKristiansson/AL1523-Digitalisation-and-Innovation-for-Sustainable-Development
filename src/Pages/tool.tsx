@@ -18,6 +18,14 @@ const useStyles = createUseStyles({
 		"& > *": {
 			margin: "0 10px",
 		},
+		// If max width 560px, then display as column
+		"@media (max-width: 560px)": {
+			flexDirection: "column",
+			"& > *": {
+				margin: "30px 0",
+			},
+			paddingTop: "50px",
+		},
 	},
 	Button: {
 		backgroundColor: "#72AD29",
