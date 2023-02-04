@@ -21,7 +21,6 @@ const useStyles = createUseStyles({
     },
     RowHeader: {
         paddingLeft: "3%",
-        paddingTop: "10px",
         marginBottom: "-20px",
         color: "#22222",
         "@media (max-width: 1000px)": {
@@ -29,6 +28,9 @@ const useStyles = createUseStyles({
         },
         "@media (max-width: 500px)": {
             paddingLeft: "5%",
+        },
+        "&:not(:first-child)": {
+            paddingTop: "10px",
         },
     },
     Col4: {
