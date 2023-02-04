@@ -3,8 +3,8 @@ import { createUseStyles } from "react-jss"
 
 const useStyles = createUseStyles({
     Wrapper: {
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
     },
 	Header: {
 		color: "#72AD29",
@@ -49,19 +49,21 @@ const useStyles = createUseStyles({
         width: "50%",
         textAlign: "center",
     },
+    RowHeader: {
+        paddingLeft: "12.5%",
+        marginBottom: "-15px",
+        color: "#22222",
+        "@media (max-width: 1000px)": {
+            paddingLeft: "2.5%",
+        },
+        "@media (max-width: 500px)": {
+            paddingLeft: "5%",
+        },
+    },
 });
 
 export const Result: React.FC<{ result: any }> = ({ result }): JSX.Element => {
 	const classes = useStyles();
-
-    const table = [
-        { testType: "Control A0D2", result: result.controlA0D2 },
-        { testType: "Control D2A0", result: result.controlD2A0 },
-        { testType: "Logical Test", result: result.logicalTest },
-        { testType: "Soil Classification", result: result.soilClassification },
-        { testType: "Border Zone A", result: result.borderZoneA },
-        { testType: "Border Zone B", result: result.borderZoneB },
-    ];
 
 	return (
 		<>
@@ -69,22 +71,42 @@ export const Result: React.FC<{ result: any }> = ({ result }): JSX.Element => {
                 <div className={classes.Header}>
                     <h1>Result</h1>
                 </div>
-                <table className={classes.Table}>
-                    <thead className={classes.Thead}>
-                        <tr className={classes.Tr}>
-                            <th className={classes.Th}>Test Type</th>
-                            <th className={classes.Th}>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {table.map((row, index) => (
-                            <tr key={index} className={classes.Tr}>
-                                <td className={classes.Td}>{row.testType}</td>
-                                <td className={classes.Td}>{row.result}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {result.map((sample: any, index: number) => {
+                    const table = [
+                        { testType: "Control A0D2", result: sample.controlA0D2 },
+                        { testType: "Control D2A0", result: sample.controlD2A0 },
+                        { testType: "Logical Test", result: sample.logicalTest },
+                        { testType: "Soil Classification", result: sample.soilClassification },
+                        { testType: "Border Zone A", result: sample.borderZoneA },
+                        { testType: "Border Zone B", result: sample.borderZoneB },
+                    ];
+
+                    return (
+                        <div key={index}>
+                            {result.length > 1 &&
+                                <div className={classes.RowHeader}>
+                                    <h2>Sample {index + 1}</h2>
+                                </div>
+                            }
+
+                            <table className={classes.Table}>
+                                <thead className={classes.Thead}>
+                                    <tr className={classes.Tr}>
+                                        <th className={classes.Th}>Test Type</th>
+                                        <th className={classes.Th}>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {table.map((row, index) => (
+                                        <tr key={index} className={classes.Tr}>
+                                            <td className={classes.Td}>{row.testType}</td>
+                                            <td className={classes.Td}>{row.result}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )})}
             </div>
 		</>
 	);

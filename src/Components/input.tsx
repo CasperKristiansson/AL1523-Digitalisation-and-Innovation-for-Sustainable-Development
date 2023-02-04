@@ -19,6 +19,20 @@ const useStyles = createUseStyles({
             gridTemplateColumns: "repeat(1, 1fr)",
         },
     },
+    RowHeader: {
+        paddingLeft: "3%",
+        marginBottom: "-20px",
+        color: "#22222",
+        "@media (max-width: 1000px)": {
+            paddingLeft: "2.5%",
+        },
+        "@media (max-width: 500px)": {
+            paddingLeft: "5%",
+        },
+        "&:not(:first-child)": {
+            paddingTop: "10px",
+        },
+    },
     Col4: {
         display: "flex",
         alignItems: "center",
@@ -49,72 +63,72 @@ const useStyles = createUseStyles({
     },
 });
 
-export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }): JSX.Element => {
+export const Input: React.FC<{setState: any, numSamples: number, states: any}> = ({ setState, numSamples, states }): JSX.Element => {
 	const classes = useStyles();
 
     const inputMapping = [
         {
             id: "location",
             label: "Location",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, location: e.target.value});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], location: e.target.value});
             },
             type: "text",
         },
         {
             id: "depth",
             label: "Depth",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, depth: e.target.value});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], depth: e.target.value});
             },
             type: "text",
         },
         {
             id: "surfaceType",
             label: "Surface Type",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, surfaceType: e.target.value});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], surfaceType: e.target.value});
             },
             type: "text",
         },
         {
             id: "s",
             label: "S (mg/kg T S)",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
                 // Add it as a number and not a string
-                setState({...state, s: parseInt(e.target.value)});
+                setState(index, {...states[index], s: parseInt(e.target.value)});
             },
             type: "number",
         },
         {
             id: "ca",
             label: "Ca (mg/kg TS)",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, ca: parseInt(e.target.value)});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], ca: parseInt(e.target.value)});
             },
             type: "number",
         },
         {
             id: "fe",
             label: "Fe (mg/kg T s)",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, fe: parseInt(e.target.value)});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], fe: parseInt(e.target.value)});
             },
             type: "number",
         },
         {
             id: "pHinit",
             label: "pH(init)",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, pHinit: parseInt(e.target.value)});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], pHinit: parseInt(e.target.value)});
             },
             type: "number",
         },
         {
             id: "pHox",
             label: "pH(ox)",
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, pHox: parseInt(e.target.value)});
+            onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+                setState(index, {...states[index], pHox: parseInt(e.target.value)});
             },
             type: "number",
         },
@@ -123,19 +137,30 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
 	return (
 		<>
 			<div className={classes.Input}>
-                <div className={classes.Row}>
-                    {inputMapping.map((input) => (
-                        <div className={classes.Col4} key={input.id}>
-                            <label htmlFor={input.id} className={classes.label}>{input.label}</label>
-                            <input
-                                className={classes.InputControl}
-                                id={input.id}
-                                type={input.type}
-                                onChange={input.onChange}
-                            />
+                {/* Map for every NumSample */}
+                {[...Array(numSamples)].map((_, index) => (
+                    <div key={index}>
+                        {numSamples > 1 &&
+                            <div className={classes.RowHeader}>
+                                <h2>Sample {index + 1}</h2>
+                            </div>
+                        }
+
+                        <div className={classes.Row}>
+                            {inputMapping.map((input) => (
+                                <div className={classes.Col4} key={input.id}>
+                                    <label htmlFor={input.id} className={classes.label}>{input.label}</label>
+                                    <input
+                                        className={classes.InputControl}
+                                        id={input.id}
+                                        type={input.type}
+                                        onChange={(e) => input.onChange(e, index)}
+                                    />
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
 		</>
 	);

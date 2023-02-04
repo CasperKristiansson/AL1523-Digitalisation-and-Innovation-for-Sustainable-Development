@@ -57,19 +57,19 @@ export const computeClassification = (classificationsState: ClassificationState)
 // =IFS([@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;+Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]])
 function controlA0D2(check: Check): string {
     switch (true) {
-        case check.a0 === true:
+        case check.a0:
             return "A0) ej sulfidjord";
-        case check.a1 === true:
+        case check.a1:
             return "A1) Sulfidjord med försumbar försurningsrisk";
-        case check.b0 === true:
+        case check.b0:
             return "B) Sulfidjord låg försurningsrisk";
-        case check.c1 === true:
+        case check.c1:
             return "C1) Sur sulfatjord låg försurningsrisk";
-        case check.c2 === true:
+        case check.c2:
             return "C2) Sur sulfatjord med försurningsrisk";
-        case check.d1 === true:
+        case check.d1:
             return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
-        case check.d2 === true:
+        case check.d2:
             return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
         default:
             return "";
