@@ -8,6 +8,15 @@ const useStyles = createUseStyles({
 		fontSize: "2em",
 		lineHeight: "1.2em",
 		letterSpacing: "0.08em",
+		"@media (max-width: 600px)": {
+			fontSize: "1.5em",
+		},
+		"@media (max-width: 450px)": {
+			fontSize: "1.2em",
+		},
+		"@media (max-width: 350px)": {
+			fontSize: "1em",
+		},
 	},
 });
 
