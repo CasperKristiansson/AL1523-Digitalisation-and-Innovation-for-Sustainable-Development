@@ -15,6 +15,9 @@ const useStyles = createUseStyles({
 		justifyContent: "center",
 		paddingTop: "100px",
 		paddingBottom: "25px",
+		"& > *": {
+			margin: "0 10px",
+		},
 	},
 	Button: {
 		backgroundColor: "#72AD29",
@@ -26,6 +29,21 @@ const useStyles = createUseStyles({
 		fontSize: "2em",
 		cursor: "pointer",
 	},
+	Select: {
+		width: "250px",
+		height: "55px",
+		backgroundColor: "#E9E5E5",
+		border: "1px solid #A49B9B",
+		borderRadius: "8px",
+		fontSize: "1.4em",
+		color: "#222222",
+	},
+	SelectWrapper: {
+		display: "flex",
+		flexDirection: "column",
+		color: "#777777",
+		marginTop: "-20px",
+	},
 });
 
 export const Tool: React.FC<{}> = (): JSX.Element => {
@@ -34,6 +52,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 	const [loading, setLoading] = React.useState(false);
 	const [showResult, setShowResult] = React.useState(false);
 	const [numSamples, setNumSamples] = React.useState(1);
+	const [result, setResult] = React.useState({} as Classification);
 	const [states, setStates] = React.useState([{
 		location: "",
 		depth: "",
@@ -77,8 +96,6 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		setStates(newStates);
 	};
 
-	const [result, setResult] = React.useState({} as Classification);
-
 	// const handleAnalyzeClick = () => {
 	// 	if (
 	// 		!state.location ||
@@ -113,11 +130,14 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 				<button className={classes.Button} >
 					Analyze
 				</button>
-				<select value={numSamples} onChange={handleNumSamplesChange}>
-					{Array.from({length: 10}, (_, i) => i + 1).map(i => (
-					<option key={i} value={i}>{i}</option>
-					))}
-				</select>
+				<div className={classes.SelectWrapper}>
+					<label>Number of samples</label>
+					<select value={numSamples} onChange={handleNumSamplesChange} className={classes.Select}>
+						{Array.from({length: 10}, (_, i) => i + 1).map(i => (
+						<option key={i} value={i}>{i}</option>
+						))}
+					</select>
+				</div>
 			</div>
 			{showResult && (
 				<Result
