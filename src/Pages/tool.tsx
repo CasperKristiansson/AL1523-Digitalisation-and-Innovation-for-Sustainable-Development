@@ -46,7 +46,6 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 	const [result, setResult] = React.useState({} as Classification);
 
 	const handleAnalyzeClick = () => {
-		console.log(state)
 		if (
 			!state.location ||
 			!state.depth ||
@@ -68,7 +67,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 
 			setResult(computeClassification(state));
 
-		}, 200);
+		}, 350);
 	};
 
 	return (
