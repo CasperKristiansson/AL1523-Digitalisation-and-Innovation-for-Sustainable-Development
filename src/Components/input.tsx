@@ -44,6 +44,7 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                 setState({...state, location: e.target.value});
             },
+            type: "text",
         },
         {
             id: "depth",
@@ -51,6 +52,7 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                 setState({...state, depth: e.target.value});
             },
+            type: "text",
         },
         {
             id: "surfaceType",
@@ -58,41 +60,48 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                 setState({...state, surfaceType: e.target.value});
             },
+            type: "text",
         },
         {
             id: "s",
             label: "S (mg/kg T S)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, s: e.target.value});
+                // Add it as a number and not a string
+                setState({...state, s: parseInt(e.target.value)});
             },
+            type: "number",
         },
         {
             id: "ca",
             label: "Ca (mg/kg TS)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, ca: e.target.value});
+                setState({...state, ca: parseInt(e.target.value)});
             },
+            type: "number",
         },
         {
             id: "fe",
             label: "Fe (mg/kg T s)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, fe: e.target.value});
+                setState({...state, fe: parseInt(e.target.value)});
             },
+            type: "number",
         },
         {
             id: "pHinit",
             label: "pH(init)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, pHinit: e.target.value});
+                setState({...state, pHinit: parseInt(e.target.value)});
             },
+            type: "number",
         },
         {
             id: "pHox",
             label: "pH(ox)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setState({...state, pHox: e.target.value});
+                setState({...state, pHox: parseInt(e.target.value)});
             },
+            type: "number",
         },
     ];
 
@@ -106,7 +115,7 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
                             <input
                                 className={classes.InputControl}
                                 id={input.id}
-                                type="text"
+                                type={input.type}
                                 onChange={input.onChange}
                             />
                         </div>
