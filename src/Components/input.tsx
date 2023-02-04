@@ -22,6 +22,16 @@ const useStyles = createUseStyles({
         backgroundColor: "#E9E5E5",
         border: "1px solid #A49B9B",
         borderRadius: "8px",
+        // Increase the input font size
+        fontSize: "1.4em",
+        color: "#222222"
+    },
+    label: {
+        textAlign: "left",
+        width: "75%",
+        height: "30px",
+        color: "#777777",
+        fontSize: "1.4em",
     },
 });
 
@@ -102,7 +112,7 @@ export const Input: React.FC<{}> = (): JSX.Element => {
                 <div className={classes.Row}>
                     {inputMapping.map((input) => (
                         <div className={classes.Col4}>
-                            <label htmlFor={input.id}>{input.label}</label>
+                            <label htmlFor={input.id} className={classes.label}>{input.label}</label>
                             <input
                                 className={classes.InputControl}
                                 id={input.id}
