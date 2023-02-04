@@ -43,16 +43,6 @@ export interface Classification {
     borderZoneB: string;
 }
 
-// Create a interface for const check = {
-    //     a0: checkA0(classificationsState),
-    //     a1: checkA1(classificationsState),
-    //     b0: checkB0(classificationsState),
-    //     c1: checkC1(classificationsState),
-    //     c2: checkC2(classificationsState),
-    //     d1: checkD1(classificationsState),
-    //     d2: checkD2(classificationsState),
-    // };
-
 interface Check {
     a0: Boolean;
     a1: Boolean;
@@ -96,6 +86,7 @@ export const computeClassification = (classificationsState: ClassificationState)
     };
 }
 
+// =IFS([@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;+Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]])
 function controlA0D2(check: Check): string {
     switch (true) {
         case check.a0 === true:
@@ -117,6 +108,7 @@ function controlA0D2(check: Check): string {
     }
 }
 
+// =IFS([@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]])
 function controlD2A0(check: Check): string {
     switch (true) {
         case check.d2:
@@ -138,6 +130,7 @@ function controlD2A0(check: Check): string {
     }
 }
 
+// =IFS([@[Kontroll A0-D2]]=[@[KontrollD2-A0]];"OK";[@[Kontroll A0-D2]]<[@[KontrollD2-A0]];"Gränszon")
 function logicalTest(controlA0D2: string, controlD2A0: string): string {
     if (controlA0D2 === controlD2A0) {
         return "OK";
@@ -148,7 +141,7 @@ function logicalTest(controlA0D2: string, controlD2A0: string): string {
     }
 }
 
-//=IF([@[Kontroll A0-D2]]=[@[KontrollD2-A0]];[@[Kontroll A0-D2]];"Kontrollera (gränszon)")
+// =IF([@[Kontroll A0-D2]]=[@[KontrollD2-A0]];[@[Kontroll A0-D2]];"Kontrollera (gränszon)")
 function soilClassification(controlA0D2: string, controlD2A0: string): string {
     if (controlA0D2 === controlD2A0) {
         return controlA0D2;
