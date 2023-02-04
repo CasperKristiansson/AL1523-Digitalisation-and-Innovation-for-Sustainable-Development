@@ -19,6 +19,12 @@ const useStyles = createUseStyles({
             gridTemplateColumns: "repeat(1, 1fr)",
         },
     },
+    RowHeader: {
+        paddingLeft: "3%",
+        paddingTop: "10px",
+        marginBottom: "-20px",
+        color: "#22222"
+    },
     Col4: {
         display: "flex",
         alignItems: "center",
@@ -126,7 +132,11 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
                 {/* Map for every NumSample */}
                 {[...Array(numSamples)].map((_, index) => (
                     <div key={index}>
-                        {numSamples > 1 && <h2>Sample {index + 1}</h2>}
+                        {numSamples > 1 &&
+                            <div className={classes.RowHeader}>
+                                <h2>Sample {index + 1}</h2>
+                            </div>
+                        }
 
                         <div className={classes.Row}>
                             {inputMapping.map((input) => (
