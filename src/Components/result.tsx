@@ -21,7 +21,9 @@ const useStyles = createUseStyles({
         borderRadius: "8px",
         fontSize: "1.4em",
         color: "#222222",
+        borderStyle: "hidden",
         borderCollapse: "collapse",
+        boxShadow: "0 0 0 1px #A49B9B",
         "@media (max-width: 1000px)": {
             width: "95%",
         },
@@ -29,14 +31,17 @@ const useStyles = createUseStyles({
     Thead: {
         backgroundColor: "#E9E5E5",
         border: "1px solid #A49B9B",
+        borderRadius: "8px",
     },
     Tr: {
         border: "1px solid #A49B9B",
+        borderRadius: "8px",
     },
     Th: {
         padding: "10px",
         fontSize: "1.6em",
         border: "1px solid #A49B9B",
+        borderRadius: "8px",
     },
     Td: {
         padding: "10px",
