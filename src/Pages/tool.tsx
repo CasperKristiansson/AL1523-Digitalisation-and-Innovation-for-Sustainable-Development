@@ -50,6 +50,19 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 	});
 
 	const handleAnalyzeClick = () => {
+		if (
+			state.location === "" ||
+			state.depth === "" ||
+			state.surfaceType === "" ||
+			state.s === "" ||
+			state.ca === "" ||
+			state.fe === "" ||
+			state.pHinit === "" ||
+			state.pHox === ""
+		) {
+			alert("Please fill all fields");
+			return;
+		}
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
