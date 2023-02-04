@@ -43,7 +43,7 @@ export interface Classification {
     borderZoneB: string;
 }
 
-export const computeClassification = (classifications: ClassificationState): Classification => {
+export const computeClassification = (classificationsState: ClassificationState): Classification => {
     return {
         controlA0D2: "",
         controlD2A0: "",

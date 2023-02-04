@@ -101,7 +101,7 @@ export const Input: React.FC<{setState: any, state: any}> = ({ setState, state }
 			<div className={classes.Input}>
                 <div className={classes.Row}>
                     {inputMapping.map((input) => (
-                        <div className={classes.Col4}>
+                        <div className={classes.Col4} key={input.id}>
                             <label htmlFor={input.id} className={classes.label}>{input.label}</label>
                             <input
                                 className={classes.InputControl}
