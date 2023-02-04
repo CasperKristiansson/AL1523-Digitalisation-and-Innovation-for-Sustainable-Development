@@ -17,14 +17,18 @@ const useStyles = createUseStyles({
     },            
 });
 
-export const Loader: React.FC<{}> = (): JSX.Element => {
+export const Loader: React.FC<{ show: boolean }> = ({ show }): JSX.Element => {
 	const classes = useStyles();
 
 	return (
 		<>
-			<div className={classes.Overlay}>
-                <FadeLoader color="#36d7b7" size={150}/>
-            </div>
+            {show ?
+                <div className={classes.Overlay}>
+                    <FadeLoader color="#36d7b7" size={150}/>
+                </div>
+                :
+                null
+            }
 		</>
 	);
 };

@@ -27,6 +27,7 @@ const useStyles = createUseStyles({
 export const Tool: React.FC<{}> = (): JSX.Element => {
 	const classes = useStyles();
 
+	const [loading, setLoading] = React.useState(false);
 	const [state, setState] = React.useState({
 		location: "",
 		depth: "",
@@ -38,14 +39,18 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		pHox: "",
 	});
 
+	const handleAnalyzeClick = () => {
+		setLoading(true);
+	};
+
 	return (
-		<>
-			<Loader />
+		<>	
+			<Loader show={loading} />
 			<Header />
 			<Input setState={setState} state={state}/>
 			<div className={classes.ButtonWrapper}>
 				<button className={classes.Button}
-
+					onClick={handleAnalyzeClick}
 				>Analyze</button>
 			</div>
 		</>
