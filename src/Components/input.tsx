@@ -23,7 +23,13 @@ const useStyles = createUseStyles({
         paddingLeft: "3%",
         paddingTop: "10px",
         marginBottom: "-20px",
-        color: "#22222"
+        color: "#22222",
+        "@media (max-width: 1000px)": {
+            paddingLeft: "2.5%",
+        },
+        "@media (max-width: 500px)": {
+            paddingLeft: "5%",
+        },
     },
     Col4: {
         display: "flex",
