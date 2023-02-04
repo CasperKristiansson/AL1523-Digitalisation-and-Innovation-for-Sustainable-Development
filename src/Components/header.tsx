@@ -3,8 +3,11 @@ import { createUseStyles } from "react-jss"
 
 const useStyles = createUseStyles({
 	Header: {
-		// Set the text color to: 72AD29
 		color: "#72AD29",
+		textAlign: "center",
+		fontSize: "2em",
+		lineHeight: "1.2em",
+		letterSpacing: "0.08em",
 	},
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tool } from './Pages/Tool';
+import { Tool } from './Pages/tool';
 import './App.css';
 
 function App() {
