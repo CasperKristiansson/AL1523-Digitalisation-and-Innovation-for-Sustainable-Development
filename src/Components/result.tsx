@@ -22,6 +22,9 @@ const useStyles = createUseStyles({
         fontSize: "1.4em",
         color: "#222222",
         borderCollapse: "collapse",
+        "@media (max-width: 1000px)": {
+            width: "95%",
+        },
     },
     Thead: {
         backgroundColor: "#E9E5E5",

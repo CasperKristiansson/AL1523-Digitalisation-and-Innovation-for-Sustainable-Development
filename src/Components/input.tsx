@@ -12,11 +12,9 @@ const useStyles = createUseStyles({
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         gridGap: "15px",
-        // At 1000px or less, the grid will be 2 columns wide
         "@media (max-width: 1000px)": {
             gridTemplateColumns: "repeat(2, 1fr)",
         },
-        // At 500px or less, the grid will be 1 column wide
         "@media (max-width: 500px)": {
             gridTemplateColumns: "repeat(1, 1fr)",
         },
