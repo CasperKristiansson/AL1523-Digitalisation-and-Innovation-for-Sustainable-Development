@@ -31,24 +31,9 @@ const useStyles = createUseStyles({
 export const Tool: React.FC<{}> = (): JSX.Element => {
 	const classes = useStyles();
 
-	//
-
 	const [loading, setLoading] = React.useState(false);
 	const [showResult, setShowResult] = React.useState(false);
 	const [numSamples, setNumSamples] = React.useState(1);
-	// Instead of having one state like this:
-	// const [state, setState] = React.useState({
-	// 	location: "",
-	// 	depth: "",
-	// 	surfaceType: "",
-	// 	s: 0,
-	// 	ca: 0,
-	// 	fe: 0,
-	// 	pHinit: 0,
-	// 	pHox: 0,
-	// } as ClassificationState);
-	// Keep track of a array of states. The standard should be one empty
-	// state, and then add more states as needed.
 	const [states, setStates] = React.useState([{
 		location: "",
 		depth: "",
@@ -59,14 +44,10 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		pHinit: 0,
 		pHox: 0,
 	} as ClassificationState]);
-	// This function will be passed to the Input component, and will be
-	// called when the user changes the value of an input.
+	
 	const setState = (index: number, state: ClassificationState) => {
-		// Create a copy of the states array.
 		const newStates = [...states];
-		// Replace the state at the given index with the new state.
 		newStates[index] = state;
-		// Update the states array.
 		setStates(newStates);
 	};
 
