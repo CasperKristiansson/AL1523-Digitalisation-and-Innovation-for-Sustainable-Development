@@ -2,11 +2,12 @@ import React from 'react';
 import { Header } from '../Components/header';
 import { Input } from '../Components/input';
 import { Loader } from '../Components/loader';
+import { Result } from '../Components/result';
+
 import { createUseStyles } from "react-jss"
 
 const useStyles = createUseStyles({
 	ButtonWrapper: {
-		// Center the button
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
@@ -28,6 +29,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 	const classes = useStyles();
 
 	const [loading, setLoading] = React.useState(false);
+	const [showResult, setShowResult] = React.useState(false);
 	const [state, setState] = React.useState({
 		location: "",
 		depth: "",
@@ -38,9 +40,21 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 		pHinit: "",
 		pHox: "",
 	});
+	const [result, setResult] = React.useState({
+		controlA0D2: "",
+		controlD2A0: "",
+		logicalTest: "",
+		soilClassification: "",
+		borderZoneA: "",
+		borderZoneB: "",
+	});
 
 	const handleAnalyzeClick = () => {
 		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+			setShowResult(true);
+		}, 500);
 	};
 
 	return (
@@ -49,10 +63,15 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 			<Header />
 			<Input setState={setState} state={state}/>
 			<div className={classes.ButtonWrapper}>
-				<button className={classes.Button}
-					onClick={handleAnalyzeClick}
-				>Analyze</button>
+				<button className={classes.Button} onClick={handleAnalyzeClick}>
+					Analyze
+				</button>
 			</div>
+			{showResult && (
+				<Result
+					result={result}
+				/>
+			)}
 		</>
 	);
 };
