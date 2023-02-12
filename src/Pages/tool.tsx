@@ -126,10 +126,10 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 			<Input setState={setState} numSamples={numSamples} states={states} />
 			<div className={classes.ButtonWrapper}>
 				<button className={classes.Button} onClick={handleAnalyzeClick} >
-					Analyze
+					Analysera
 				</button>
 				<div className={classes.SelectWrapper}>
-					<label>Number of samples</label>
+					<label>Antal Prover</label>
 					<select value={numSamples} onChange={handleNumSamplesChange} className={classes.Select}>
 						{Array.from({length: 10}, (_, i) => i + 1).map(i => (
 						<option key={i} value={i}>{i}</option>

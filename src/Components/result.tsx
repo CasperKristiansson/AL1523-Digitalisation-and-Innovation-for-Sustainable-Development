@@ -69,17 +69,24 @@ export const Result: React.FC<{ result: any }> = ({ result }): JSX.Element => {
 		<>
             <div className={classes.Wrapper}>
                 <div className={classes.Header}>
-                    <h1>Result</h1>
+                    <h1>Resultat</h1>
                 </div>
                 {result.map((sample: any, index: number) => {
                     const table = [
-                        { testType: "Control A0D2", result: sample.controlA0D2 },
-                        { testType: "Control D2A0", result: sample.controlD2A0 },
-                        { testType: "Logical Test", result: sample.logicalTest },
-                        { testType: "Soil Classification", result: sample.soilClassification },
-                        { testType: "Border Zone A", result: sample.borderZoneA },
-                        { testType: "Border Zone B", result: sample.borderZoneB },
+                        // { testType: "Control A0D2", result: sample.controlA0D2 },
+                        // { testType: "Control D2A0", result: sample.controlD2A0 },
+                        // { testType: "Logical Test", result: sample.logicalTest },
+                        { testType: "Klassificering", result: sample.soilClassification },
+                        // { testType: "Border Zone A", result: sample.borderZoneA },
+                        // { testType: "Border Zone B", result: sample.borderZoneB },
                     ];
+
+                    if (sample.logicalTest !== "OK") {
+                        table.push(
+                            { testType: "Gräns Zon A", result: sample.borderZoneA },
+                            { testType: "Gräns Zon B", result: sample.borderZoneB },
+                        );
+                    }
 
                     return (
                         <div key={index}>

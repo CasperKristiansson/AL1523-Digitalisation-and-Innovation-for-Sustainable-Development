@@ -26,8 +26,8 @@ export const Header: React.FC<{}> = (): JSX.Element => {
 	return (
 		<>
 			<div className={classes.Header}>
-				<h1>Sulfide & Sulfate Soils</h1>
-				<h1>Classification Tool</h1>
+				<h1>Sulfid- och Sulfatjord</h1>
+				<h1>Klassificeringsverktyg</h1>
 			</div>
 		</>
 	);

@@ -69,7 +69,7 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
     const inputMapping = [
         {
             id: "location",
-            label: "Location",
+            label: "Plats",
             onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
                 setState(index, {...states[index], location: e.target.value});
             },
@@ -77,7 +77,7 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
         },
         {
             id: "depth",
-            label: "Depth",
+            label: "Djup",
             onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
                 setState(index, {...states[index], depth: e.target.value});
             },
@@ -85,7 +85,7 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
         },
         {
             id: "surfaceType",
-            label: "Surface Type",
+            label: "Jord Typ",
             onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
                 setState(index, {...states[index], surfaceType: e.target.value});
             },
@@ -137,7 +137,6 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
 	return (
 		<>
 			<div className={classes.Input}>
-                {/* Map for every NumSample */}
                 {[...Array(numSamples)].map((_, index) => (
                     <div key={index}>
                         {numSamples > 1 &&
