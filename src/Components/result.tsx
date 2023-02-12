@@ -76,7 +76,7 @@ export const Result: React.FC<{ result: any }> = ({ result }): JSX.Element => {
                         // { testType: "Control A0D2", result: sample.controlA0D2 },
                         // { testType: "Control D2A0", result: sample.controlD2A0 },
                         // { testType: "Logical Test", result: sample.logicalTest },
-                        { testType: "Soil Classification", result: sample.soilClassification },
+                        { testType: "Klassificering", result: sample.soilClassification },
                         // { testType: "Border Zone A", result: sample.borderZoneA },
                         // { testType: "Border Zone B", result: sample.borderZoneB },
                     ];
