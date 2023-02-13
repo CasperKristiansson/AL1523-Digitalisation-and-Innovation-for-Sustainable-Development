@@ -141,7 +141,7 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
                     <div key={index}>
                         {numSamples > 1 &&
                             <div className={classes.RowHeader}>
-                                <h2>Sample {index + 1}</h2>
+                                <h2>Prov {index + 1}</h2>
                             </div>
                         }
 

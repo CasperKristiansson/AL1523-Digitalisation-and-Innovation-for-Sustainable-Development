@@ -92,15 +92,15 @@ export const Result: React.FC<{ result: any }> = ({ result }): JSX.Element => {
                         <div key={index}>
                             {result.length > 1 &&
                                 <div className={classes.RowHeader}>
-                                    <h2>Sample {index + 1}</h2>
+                                    <h2>Prov {index + 1}</h2>
                                 </div>
                             }
 
                             <table className={classes.Table}>
                                 <thead className={classes.Thead}>
                                     <tr className={classes.Tr}>
-                                        <th className={classes.Th}>Test Type</th>
-                                        <th className={classes.Th}>Result</th>
+                                        <th className={classes.Th}>Test Typ</th>
+                                        <th className={classes.Th}>Resultat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
