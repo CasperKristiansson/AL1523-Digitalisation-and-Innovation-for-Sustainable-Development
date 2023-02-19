@@ -39,7 +39,7 @@ export const computeClassification = (classificationsState: ClassificationState)
         c1: checkC1(classificationsState),
         c2: checkC2(classificationsState),
         d1: checkD1(classificationsState),
-        d2_high: checkD2(classificationsState),
+        d2_high: checkD2High(classificationsState),
         d2_reduced: checkD2Reduced(classificationsState),
     };
 
@@ -254,7 +254,7 @@ function checkD1(classificationsState: ClassificationState): Boolean {
 }
 
 // D2) Sulphide soil without buffering capacity, very high risk of acidification = "D2" && s > 4000 && pHinit > 5.8 && fe/s > 0.1 && fe/s < 10 && ca/s < 4
-function checkD2(classificationsState: ClassificationState): Boolean {
+function checkD2High(classificationsState: ClassificationState): Boolean {
     const feS = classificationsState.fe / classificationsState.s;
     const caS = classificationsState.ca / classificationsState.s;
 
@@ -264,5 +264,19 @@ function checkD2(classificationsState: ClassificationState): Boolean {
         feS > 0.1 &&
         feS < 10 &&
         caS < 4
+    )
+}
+
+// D2 Reduced) = "D2" && s > 4000 && pHinit > 5.8 && fe/s > 0.1 && fe/s < 10 && ca/s > 4
+function checkD2Reduced(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 4000 &&
+        classificationsState.pHinit > 5.8 &&
+        feS > 0.1 &&
+        feS < 10 &&
+        caS > 4
     )
 }
