@@ -73,8 +73,12 @@ function controlA0D2(check: Check): string {
             return "C2) Sur sulfatjord med försurningsrisk";
         case check.d1:
             return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
-        case check.d2:
+        case check.d2_high:
             return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
+        case check.d2_reduced:
+            return "D2) Sulfidjord utan buffringsförmåga, Reducerad försurningsrisk";
+        case check.a0_control:
+            return "A0) Kontrollera Järnhalten";
         default:
             return "";
     }
@@ -83,7 +87,7 @@ function controlA0D2(check: Check): string {
 // =IFS([@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]])
 function controlD2A0(check: Check): string {
     switch (true) {
-        case check.d2:
+        case check.d2_high:
             return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
         case check.d1:
             return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
@@ -97,6 +101,10 @@ function controlD2A0(check: Check): string {
             return "A1) Sulfidjord med försumbar försurningsrisk";
         case check.a0:
             return "A0) ej sulfidjord";
+        case check.d2_reduced:
+            return "D2) Sulfidjord utan buffringsförmåga, Reducerad försurningsrisk";
+        case check.a0_control:
+            return "A0) Kontrollera Järnhalten";
         default:
             return "";
     }
