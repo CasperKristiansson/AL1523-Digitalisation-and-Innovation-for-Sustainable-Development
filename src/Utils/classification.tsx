@@ -20,23 +20,27 @@ export interface Classification {
 
 interface Check {
     a0: Boolean;
+    a0_control: Boolean;
     a1: Boolean;
     b0: Boolean;
     c1: Boolean;
     c2: Boolean;
     d1: Boolean;
-    d2: Boolean;
+    d2_high: Boolean;
+    d2_reduced: Boolean;
 }
 
 export const computeClassification = (classificationsState: ClassificationState): Classification => {
     const check: Check = {
         a0: checkA0(classificationsState),
+        a0_control: checkA0Control(classificationsState),
         a1: checkA1(classificationsState),
         b0: checkB0(classificationsState),
         c1: checkC1(classificationsState),
         c2: checkC2(classificationsState),
         d1: checkD1(classificationsState),
-        d2: checkD2(classificationsState),
+        d2_high: checkD2High(classificationsState),
+        d2_reduced: checkD2Reduced(classificationsState),
     };
 
     const A0D2 = controlA0D2(check);
@@ -69,8 +73,12 @@ function controlA0D2(check: Check): string {
             return "C2) Sur sulfatjord med försurningsrisk";
         case check.d1:
             return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
-        case check.d2:
+        case check.d2_high:
             return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
+        case check.d2_reduced:
+            return "D2) Sulfidjord utan buffringsförmåga, Reducerad försurningsrisk";
+        case check.a0_control:
+            return "A0) Kontrollera Järnhalten";
         default:
             return "";
     }
@@ -79,7 +87,7 @@ function controlA0D2(check: Check): string {
 // =IFS([@[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk]];[@[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]]=TRUE;Tabell132[[#Headers];[D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk]];[@[C2) Sur sulfatjord med försurningsrisk]]=TRUE;Tabell132[[#Headers];[C2) Sur sulfatjord med försurningsrisk]];[@[C1) Sur sulfatjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[C1) Sur sulfatjord låg försurningsrisk]];[@[B) Sulfidjord låg försurningsrisk]]=TRUE;Tabell132[[#Headers];[B) Sulfidjord låg försurningsrisk]];[@[A1) Sulfidjord med försumbar försurningsrisk]]=TRUE;Tabell132[[#Headers];[A1) Sulfidjord med försumbar försurningsrisk]];[@[A0) ej sulfidjord]]=TRUE;Tabell132[[#Headers];[A0) ej sulfidjord]])
 function controlD2A0(check: Check): string {
     switch (true) {
-        case check.d2:
+        case check.d2_high:
             return "D2) Sulfidjord utan buffringsförmåga, mycket hög försurningsrisk";
         case check.d1:
             return "D1) Sulfidjord utan buffringsförmåga, hög försurningsrisk";
@@ -93,6 +101,10 @@ function controlD2A0(check: Check): string {
             return "A1) Sulfidjord med försumbar försurningsrisk";
         case check.a0:
             return "A0) ej sulfidjord";
+        case check.d2_reduced:
+            return "D2) Sulfidjord utan buffringsförmåga, Reducerad försurningsrisk";
+        case check.a0_control:
+            return "A0) Kontrollera Järnhalten";
         default:
             return "";
     }
@@ -155,6 +167,20 @@ function checkA0(classificationsState: ClassificationState): Boolean {
         caS > 2.1
     )
 }
+
+// A0 Control) Control The Iron Value = "D2" && s < 2500 && pHox > 5.01 && fe/s < 50.1001 && ca/s < 5
+function checkA0Control(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s < 2500 &&
+        classificationsState.pHox > 5.01 &&
+        feS < 50.1001 &&
+        caS < 5
+    )
+}
+
 
 // A1) Sulphide soil with negligible risk of acidification = "A0" && s > 100 && pHinit > 4.89 && pHox > 4.3 && fe/s > 15 && ca/s > 1 && s < 1500
 function checkA1(classificationsState: ClassificationState): Boolean {
@@ -236,7 +262,7 @@ function checkD1(classificationsState: ClassificationState): Boolean {
 }
 
 // D2) Sulphide soil without buffering capacity, very high risk of acidification = "D2" && s > 4000 && pHinit > 5.8 && fe/s > 0.1 && fe/s < 10 && ca/s < 4
-function checkD2(classificationsState: ClassificationState): Boolean {
+function checkD2High(classificationsState: ClassificationState): Boolean {
     const feS = classificationsState.fe / classificationsState.s;
     const caS = classificationsState.ca / classificationsState.s;
 
@@ -246,5 +272,19 @@ function checkD2(classificationsState: ClassificationState): Boolean {
         feS > 0.1 &&
         feS < 10 &&
         caS < 4
+    )
+}
+
+// D2 Reduced) = "D2" && s > 4000 && pHinit > 5.8 && fe/s > 0.1 && fe/s < 10 && ca/s > 4
+function checkD2Reduced(classificationsState: ClassificationState): Boolean {
+    const feS = classificationsState.fe / classificationsState.s;
+    const caS = classificationsState.ca / classificationsState.s;
+
+    return (
+        classificationsState.s > 4000 &&
+        classificationsState.pHinit > 5.8 &&
+        feS > 0.1 &&
+        feS < 10 &&
+        caS > 4
     )
 }
