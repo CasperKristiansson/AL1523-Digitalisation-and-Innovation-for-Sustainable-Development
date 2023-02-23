@@ -7,6 +7,7 @@ import { Result } from '../Components/result';
 import { Classification, ClassificationState, computeClassification } from '../Utils/classification';
 
 import { createUseStyles } from "react-jss"
+import { Disclaimer } from '../Components/disclaimer';
 
 const useStyles = createUseStyles({
 	ButtonWrapper: {
@@ -18,7 +19,6 @@ const useStyles = createUseStyles({
 		"& > *": {
 			margin: "0 10px",
 		},
-		// If max width 560px, then display as column
 		"@media (max-width: 560px)": {
 			flexDirection: "column",
 			"& > *": {
@@ -140,6 +140,7 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 			{showResult && (
 				<Result result={results} />
 			)}
+			<Disclaimer />
 		</>
 	);
 };
