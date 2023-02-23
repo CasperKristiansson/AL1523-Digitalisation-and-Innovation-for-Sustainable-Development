@@ -7,6 +7,7 @@ const useStyles = createUseStyles({
     margin: "0 auto",
     padding: "20px",
     width: "80%",
+    paddingTop: 100,
   },
   header: {
     fontSize: "1.7em",

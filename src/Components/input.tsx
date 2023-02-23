@@ -69,7 +69,7 @@ export const Input: React.FC<{setState: any, numSamples: number, states: any}> =
     const inputMapping = [
         {
             id: "location",
-            label: "Plats",
+            label: "Plats (Kommun)",
             onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
                 setState(index, {...states[index], location: e.target.value});
             },
