@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Header } from '../Components/header';
 import { Input } from '../Components/input';
 import { Loader } from '../Components/loader';
@@ -117,6 +118,26 @@ export const Tool: React.FC<{}> = (): JSX.Element => {
 			setResults(newResults);
 
 		}, 350);
+
+		states.forEach(state => {
+			var params = new URLSearchParams();
+			params.append('location', state.location);
+			params.append('depth', state.depth);
+			params.append('type', state.surfaceType);
+			params.append('s', state.s.toString());
+			params.append('ca', state.ca.toString());
+			params.append('fe', state.fe.toString());
+			params.append('ph_init', state.pHinit.toString());
+			params.append('ph_ox', state.pHox.toString());
+
+			axios.post("http://verktyg.optimass.se/api/sulfidsoil.php", params)
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		});
 	};
 
 	return (
